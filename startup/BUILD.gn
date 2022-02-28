@@ -13,9 +13,10 @@
 
 static_library("myapp") {
     sources = [
-        "hello_world.c"
+        "main.c"
     ]
     include_dirs = [
-        "//utils/native/lite/include"
+        "//utils/native/lite/include",
+        "//vendor/hisi/hi3861/hi3861/include",
     ]
 }
