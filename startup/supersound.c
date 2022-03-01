@@ -6,7 +6,7 @@
 #include "hi_io.h"
 #include "hi_pwm.h"
 #include "hi_gpio.h"
-
+// 返回单位 cm 太近的话 数值 会飞
 float getDistance(void)
 {
     //超声波初始化
