@@ -5,26 +5,6 @@
 #include "hi_pwm.h"
 #include "hi_gpio.h"
 
-// init PWM初始化
-hi_void init(hi_void)
-{
-	hi_gpio_init();
-	//引脚复用
-	hi_io_set_func(HI_IO_NAME_GPIO_0, HI_IO_FUNC_GPIO_0_PWM3_OUT); 
-    hi_io_set_func(HI_IO_NAME_GPIO_1, HI_IO_FUNC_GPIO_1_PWM4_OUT); 	
-	hi_io_set_func(HI_IO_NAME_GPIO_9, HI_IO_FUNC_GPIO_9_PWM0_OUT); 
-    hi_io_set_func(HI_IO_NAME_GPIO_10, HI_IO_FUNC_GPIO_10_PWM1_OUT); 
-	//初始化pwm
-	hi_pwm_init(HI_PWM_PORT_PWM3);
-    hi_pwm_init(HI_PWM_PORT_PWM4);
-	hi_pwm_init(HI_PWM_PORT_PWM0);
-    hi_pwm_init(HI_PWM_PORT_PWM1);
-}
-
-hi_void turnRight(hi_void)
-{
-    
-}
 
 //pwm_control id:gpio引脚号 val:复用功能 port:PWM端口号 duty:占空比
 hi_void pwm_control(hi_io_name gpio,hi_u8 val,hi_pwm_port port,hi_u16 duty)
