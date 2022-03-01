@@ -25,13 +25,13 @@ static void PrintStationInfo(StationInfo* info)
 static void OnHotspotStaJoin(StationInfo* info)
 {
     PrintStationInfo(info);
-    printf("Device ++ ");
+    printf("Device ++ \n");
 }
 
 static void OnHotspotStaLeave(StationInfo* info)
 {   
     PrintStationInfo(info);
-    printf("Device -- ");
+    printf("Device -- \n");
 }
 static void OnHotspotStateChanged(int state)
 {
