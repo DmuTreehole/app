@@ -16,7 +16,14 @@ static_library("myapp") {
         "main.c"
     ]
     include_dirs = [
+        "//base/iot_hardware/interfaces/kits/wifiiot_lite",
         "//utils/native/lite/include",
         "//vendor/hisi/hi3861/hi3861/include",
+        "//foundation/communication/interfaces/kits/wifi_lite/wifiservice",
+        "//third_party/cmsis/CMSIS/RTOS2/Include",
+        "//vendor/hisi/hi3861/hi3861/third_party/lwip_sack/include",
+        "//kernel/liteos_a/net/lwip-2.1/porting/include",
+        # "//vendor/hisi/hi3861/hi3861/third_party/lwip_sack/include/lwip",
+        "//kernel/liteos_m/components/cmsis/2.0",
     ]
 }
