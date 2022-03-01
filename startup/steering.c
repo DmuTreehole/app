@@ -1,13 +1,10 @@
-#include <stdio.h>
-#include <unistd.h>
-#include "ohos_init.h"
-#include "ohos_types.h"
+   
 #include "hi_pwm.h"
 #include "hi_gpio.h"
 #include "hi_io.h"
 #include "hi_time.h"
 
-//500-2500 
+//-60 ~ 60 稳 -90有的时候不好使
 hi_void set_angle(hi_s32 angle)
 {
     hi_s32 duty = 1500 - 1000 * angle / 90;

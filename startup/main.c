@@ -7,6 +7,8 @@
 #include "net.c"
 #include "steering.c"
 #include "hi_task.h"
+#include "supersound.c"
+
 // init PWM初始化
 hi_void init(hi_void)
 {
@@ -21,25 +23,12 @@ hi_void init(hi_void)
     hi_pwm_init(HI_PWM_PORT_PWM4);
 	hi_pwm_init(HI_PWM_PORT_PWM0);
     hi_pwm_init(HI_PWM_PORT_PWM1);
+
 }
 
 void HelloWorld(void)
 {
-    for(;1==1;)
-    {
-        printf("0\n");
-        set_angle(0);
-        hi_sleep(3000);
-        printf("-60\n");
-        set_angle(-60);
-        hi_sleep(3000);
-        printf("60\n");
-        set_angle(60);
-        hi_sleep(3000);
-        printf("结束楼\n");
-        hi_sleep(10000);
-    }
-   
+     getDistance();
 }
 
 SYS_RUN(HelloWorld); // BUG不用管 入口程序
