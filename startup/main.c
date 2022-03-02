@@ -2,10 +2,10 @@
 #include <unistd.h>
 #include "ohos_init.h"
 #include "ohos_types.h"
-#include "motor.c"
-#include "wifi.c"
-#include "net.c"
-#include "steering.c"
+#include "motor.h"
+#include "wifi.h"
+#include "net.h"
+#include "steering.h"
 #include "hi_task.h"
 #include "supersound.c"
 
@@ -26,9 +26,8 @@ hi_void init(hi_void)
 
 }
 
-void HelloWorld(void)
-{
-     getDistance();
-}
+void Move(void) {
+  UdpServer(7895);    
+ }
 
-SYS_RUN(HelloWorld); // BUG不用管 入口程序
+SYS_RUN(Move); // BUG不用管 入口程序

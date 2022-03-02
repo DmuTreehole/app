@@ -1,4 +1,14 @@
+<<<<<<< HEAD:startup/steering.h
+#ifndef STEER
+#define STEER
+
+#include <stdio.h>
+#include <unistd.h>
+#include "ohos_init.h"
+#include "ohos_types.h"
+=======
    
+>>>>>>> main:startup/steering.c
 #include "hi_pwm.h"
 #include "hi_gpio.h"
 #include "hi_io.h"
@@ -18,3 +28,5 @@ hi_void set_angle(hi_s32 angle)
         hi_udelay(20000-duty);
     }
 }
+
+#endif
