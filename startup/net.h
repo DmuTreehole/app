@@ -11,7 +11,7 @@
 #include <netinet/in.h>
 #include "motor.h"
 
-#define SIZE 128
+#define SIZE1 128
 
 void UdpServer(unsigned short port)
 {
@@ -38,12 +38,12 @@ void UdpServer(unsigned short port)
     printf("bind to port %d success!\r\n", port);
 
     // 接受信息
-    char buf[SIZE];
+    char buf[SIZE1];
     while (1)
     {
         // 每次清空BUF
-        bzero(buf, SIZE);
-        retval = recvfrom(sockfd, buf, SIZE, 0, (struct sockaddr *)&clientAddr, &clientAddrLen);
+        bzero(buf, SIZE1);
+        retval = recvfrom(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, &clientAddrLen);
         if (retval < 0)
         {
             printf("recvfrom failed, %ld!\r\n", retval);
@@ -55,21 +55,21 @@ void UdpServer(unsigned short port)
             if (!strcmp("up\n", buf)) // 结束符也要比较
             {
                 go_forward(400);
-                //printf("前进\n");
+                printf("前进\n");
             }
             else if (!strcmp("back\n", buf))
             {   go_back(400);
-                //printf("后退\n");
+                printf("后退\n");
             }
             else if (!strcmp("left\n", buf))
             {
                 go_turnleft(400);
-                //printf("左转\n");
+                printf("左转\n");
             }
             else if (!strcmp("right\n", buf))
             {
                 go_turnright(400);
-                //printf("右转");
+                printf("右转");
             }
         }
     }

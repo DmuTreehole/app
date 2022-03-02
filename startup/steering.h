@@ -1,4 +1,3 @@
-<<<<<<< HEAD:startup/steering.h
 #ifndef STEER
 #define STEER
 
@@ -6,9 +5,6 @@
 #include <unistd.h>
 #include "ohos_init.h"
 #include "ohos_types.h"
-=======
-   
->>>>>>> main:startup/steering.c
 #include "hi_pwm.h"
 #include "hi_gpio.h"
 #include "hi_io.h"

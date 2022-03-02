@@ -27,6 +27,7 @@ hi_void init(hi_void)
 }
 
 void Move(void) {
+	RunHotspot();
   UdpServer(7895);    
  }
 
