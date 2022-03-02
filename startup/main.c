@@ -7,6 +7,8 @@
 #include "net.h"
 #include "steering.h"
 #include "hi_task.h"
+#include "supersound.c"
+
 // init PWM初始化
 hi_void init(hi_void)
 {
@@ -21,10 +23,11 @@ hi_void init(hi_void)
     hi_pwm_init(HI_PWM_PORT_PWM4);
 	hi_pwm_init(HI_PWM_PORT_PWM0);
     hi_pwm_init(HI_PWM_PORT_PWM1);
+
 }
 
 void Move(void) {
   UdpServer(7895);    
-}
+ }
 
 SYS_RUN(Move); // BUG不用管 入口程序
