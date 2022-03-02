@@ -1,3 +1,6 @@
+#ifndef MOTOR
+#define MOTOR
+
 #include <stdio.h>
 #include "ohos_init.h"
 #include "ohos_types.h"
@@ -68,3 +71,5 @@ hi_void stop(hi_void)
     pwm_control(HI_IO_NAME_GPIO_9,HI_IO_FUNC_GPIO_9_PWM0_OUT,HI_PWM_PORT_PWM0,0);
     gpio_control(HI_IO_NAME_GPIO_10,HI_GPIO_IDX_10,HI_GPIO_DIR_OUT,HI_GPIO_VALUE0,HI_IO_FUNC_GPIO_10_GPIO);
 }
+
+#endif 

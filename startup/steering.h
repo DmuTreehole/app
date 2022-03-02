@@ -1,3 +1,6 @@
+#ifndef STEER
+#define STEER
+
 #include <stdio.h>
 #include <unistd.h>
 #include "ohos_init.h"
@@ -21,3 +24,5 @@ hi_void set_angle(hi_s32 angle)
         hi_udelay(20000-duty);
     }
 }
+
+#endif
