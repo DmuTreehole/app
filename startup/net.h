@@ -13,6 +13,8 @@
 
 #define SIZE1 128
 
+int speed = 0;
+
 void UdpServer(unsigned short port)
 {
     ssize_t retval = 0;
@@ -54,22 +56,38 @@ void UdpServer(unsigned short port)
             //printf(strcmp("up", buf));
             if (!strcmp("up\n", buf)) // 结束符也要比较
             {
-                go_forward(400);
+                go_forward(speed);
                 printf("前进\n");
             }
             else if (!strcmp("back\n", buf))
-            {   go_back(400);
+            {   go_back(speed);
                 printf("后退\n");
             }
             else if (!strcmp("left\n", buf))
             {
-                go_turnleft(400);
+                go_turnleft(speed);
                 printf("左转\n");
             }
             else if (!strcmp("right\n", buf))
             {
-                go_turnright(400);
+                go_turnright(speed);
                 printf("右转");
+            }else if (!strcmp("stop\n", buf))
+            {
+                speed = 0;
+                stop();
+                printf("停车");
+            }else if (!strcmp("speedup\n", buf))
+            {
+                speed += 50 ;
+                printf("加速");
+            }else if (!strcmp("speeddown\n", buf))
+            {
+                speed -= 50 ;
+                if (speed < 0) {
+                    speed = 0;
+                }
+                printf("减速");
             }
         }
     }
