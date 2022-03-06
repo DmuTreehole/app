@@ -107,7 +107,7 @@ void UdpServer(unsigned short port)
             }else if (!strcmp("stop\n", buf))
             {
                 speed = 0;
-                stop();
+                go_forward(speed);
                 printf("停车");
             }else if (!strcmp("speedup\n", buf))
             {
