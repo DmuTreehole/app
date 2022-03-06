@@ -13,7 +13,7 @@
 
 #define SIZE1 128
 
-int speed = 0;
+int speed = 400;
 
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 
@@ -106,8 +106,7 @@ void UdpServer(unsigned short port)
                 printf("右转");
             }else if (!strcmp("stop\n", buf))
             {
-                speed = 0;
-                go_forward(speed);
+		stop();
                 printf("停车");
             }else if (!strcmp("speedup\n", buf))
             {
