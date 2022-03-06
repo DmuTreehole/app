@@ -63,9 +63,7 @@ hi_void go_turnleft(hi_u16 speed)
 
 }
 
-/*
-
-//stop
+// stop
 hi_void stop(hi_void)
 {
     pwm_control(HI_IO_NAME_GPIO_0,HI_IO_FUNC_GPIO_0_PWM3_OUT,HI_PWM_PORT_PWM3,0);
@@ -74,5 +72,4 @@ hi_void stop(hi_void)
     gpio_control(HI_IO_NAME_GPIO_10,HI_GPIO_IDX_10,HI_GPIO_DIR_OUT,HI_GPIO_VALUE0,HI_IO_FUNC_GPIO_10_GPIO);
 }
 
-*/
 #endif 
