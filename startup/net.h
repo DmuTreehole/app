@@ -13,15 +13,15 @@
 
 #define SIZE1 128
 
-int speed = 0;
+int speed = 400;
 
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 
 void ChangeSpeed(bool as){
     if (as) {
-        speed += 50;
-    }else{
         speed -= 50;
+    }else{
+        speed += 50;
         if(speed < 0 ) {
             speed = 0;
         }
@@ -106,8 +106,8 @@ void UdpServer(unsigned short port)
                 printf("右转");
             }else if (!strcmp("stop\n", buf))
             {
-                speed = 0;
                 stop();
+                speed = 400;
                 printf("停车");
             }else if (!strcmp("speedup\n", buf))
             {
