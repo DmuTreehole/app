@@ -15,6 +15,33 @@
 
 int speed = 0;
 
+int direct = 0; // 0 直行 -1 后退 1 左转 2右转
+
+void ChangeSpeed(bool as){
+    if (as) {
+        speed += 50;
+    }else{
+        speed -= 50;
+        if(speed < 0 ) {
+            speed = 0;
+        }
+    }
+    switch (direct){
+    case 0:
+        go_forward(speed);
+        break;
+    case 1:
+        go_turnleft(speed);
+        break;
+    case 2:
+        go_turnright(speed);
+        break;
+    case -1:
+        go_back(speed);
+        break;
+    }
+}
+
 void UdpServer(unsigned short port)
 {
     ssize_t retval = 0;
@@ -56,37 +83,39 @@ void UdpServer(unsigned short port)
             //printf(strcmp("up", buf));
             if (!strcmp("up\n", buf)) // 结束符也要比较
             {
+                direct = 0;
                 go_forward(speed);
                 printf("前进\n");
             }
             else if (!strcmp("back\n", buf))
-            {   go_back(speed);
+            {   
+                direct = -1;
+                go_back(speed);
                 printf("后退\n");
             }
             else if (!strcmp("left\n", buf))
             {
+                direct = 1;
                 go_turnleft(speed);
                 printf("左转\n");
             }
             else if (!strcmp("right\n", buf))
             {
+                direct = 2;
                 go_turnright(speed);
                 printf("右转");
             }else if (!strcmp("stop\n", buf))
             {
                 speed = 0;
-                stop();
+                go_forward(speed);
                 printf("停车");
             }else if (!strcmp("speedup\n", buf))
             {
-                speed += 50 ;
+                ChangeSpeed(true);
                 printf("加速");
             }else if (!strcmp("speeddown\n", buf))
             {
-                speed -= 50 ;
-                if (speed < 0) {
-                    speed = 0;
-                }
+                ChangeSpeed(false);
                 printf("减速");
             }
         }
