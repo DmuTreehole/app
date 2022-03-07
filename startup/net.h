@@ -20,10 +20,13 @@ int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 void ChangeSpeed(bool as){
     if (!as) {
         speed += 100;
+        if (speed % 100 == 1) {
+            speed -= 1
+        }
     }else{
         speed -= 100;
         if(speed < 0 ) {
-            speed = 0;
+            speed = 1;
         }
     }
     printf("改变速度,当前速度为：%d",speed);

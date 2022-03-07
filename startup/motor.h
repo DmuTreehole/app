@@ -15,7 +15,7 @@ hi_void pwm_control(hi_io_name gpio,hi_u8 val,hi_pwm_port port,hi_u16 duty)
     hi_io_set_func(gpio,val);
     hi_pwm_init(port);
     hi_pwm_set_clock(PWM_CLK_160M);
-    hi_pwm_start(port,duty,1500);
+    hi_pwm_start(port,duty,2500);
 }
 
 //gpio_control gpio:gpio引脚号 id:硬件的管脚号 dir:gpio输出方向 gpio_val:gpio输出状态 val:gpio引脚功能
