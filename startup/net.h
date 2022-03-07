@@ -21,7 +21,7 @@ void ChangeSpeed(bool as){
     if (!as) {
         speed += 100;
         if (speed % 100 == 1) {
-            speed -= 1
+            speed -= 1;
         }
     }else{
         speed -= 100;
