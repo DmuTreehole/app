@@ -26,6 +26,7 @@ void ChangeSpeed(bool as){
             speed = 0;
         }
     }
+    printf("改变速度,当前速度为：%d",speed);
     switch (direct){
     case 0:
         go_forward(speed);
