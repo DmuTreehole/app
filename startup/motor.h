@@ -20,7 +20,7 @@ hi_void pwm_control(hi_io_name gpio,hi_u8 val,hi_pwm_port port,hi_u16 duty)
 
 //gpio_control gpio:gpio引脚号 id:硬件的管脚号 dir:gpio输出方向 gpio_val:gpio输出状态 val:gpio引脚功能
 hi_void gpio_control(hi_io_name gpio,hi_gpio_idx id,hi_gpio_dir dir,hi_gpio_value gpio_val,hi_u8 val)
-{
+{ 
     hi_io_set_func(gpio,val);
     hi_gpio_set_dir(id,dir);
     hi_gpio_set_ouput_val(id,gpio_val);

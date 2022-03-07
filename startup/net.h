@@ -18,10 +18,10 @@ int speed = 400;
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 
 void ChangeSpeed(bool as){
-    if (as) {
-        speed -= 50;
+    if (!as) {
+        speed += 100;
     }else{
-        speed += 50;
+        speed -= 100;
         if(speed < 0 ) {
             speed = 0;
         }
