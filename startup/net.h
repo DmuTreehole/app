@@ -13,7 +13,7 @@
 
 #define SIZE1 128
 
-int speed = 400;
+int speed = 800;
 
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 
