@@ -95,7 +95,6 @@ static void WifiHotspotTask(void *arg)
 void RunHotspot(void)
 {
     osThreadAttr_t attr;
-
     attr.name = "WifiHotspotTask";
     attr.attr_bits = 0U;
     attr.cb_mem = NULL;

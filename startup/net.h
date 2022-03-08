@@ -99,6 +99,7 @@ void UdpServer(unsigned short port)
     if (osThreadNew(UltraSonicDetector, NULL, &attr) == NULL) {
         printf("Falied to create ultrasound\n");
     }
+    printf("初始化完成");
     while (1)
     {
         // 每次清空BUF
@@ -118,6 +119,7 @@ void UdpServer(unsigned short port)
                 if(send_length<0){
                     printf("发送数据包失败\n");
                 }
+                printf("已发送数据包\n");
             }
             isTouched=false;//初始化为没有避障的状态
             if (!strcmp("up\n", buf)) // 结束符也要比较

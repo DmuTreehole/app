@@ -32,7 +32,7 @@ float getDistance(void)
     hi_gpio_set_ouput_val(HI_GPIO_IDX_7,HI_GPIO_VALUE1);
     hi_udelay(20);
     hi_gpio_set_ouput_val(HI_GPIO_IDX_7,HI_GPIO_VALUE0);                      
-    printf("初始化完成");
+
     //计算和障碍物之间的距离
     while(1)
     {
