@@ -1,3 +1,5 @@
+#ifndef SUPERSOUND
+#define SUPERSOUND
 #include <stdio.h>
 #include <unistd.h>
 #include "ohos_init.h"
@@ -5,6 +7,7 @@
 #include "hi_types_base.h"
 #include "hi_io.h"
 #include "hi_pwm.h"
+#include "hi_time.h"
 #include "hi_gpio.h"
 // 返回单位 cm 太近的话 数值 会飞
 float getDistance(void)
@@ -30,6 +33,7 @@ float getDistance(void)
     hi_udelay(20);
     hi_gpio_set_ouput_val(HI_GPIO_IDX_7,HI_GPIO_VALUE0);                      
     printf("初始化完成");
+    //计算和障碍物之间的距离
     while(1)
     {
         hi_gpio_get_input_val(HI_GPIO_IDX_8,&val);
@@ -37,13 +41,13 @@ float getDistance(void)
         if((val == HI_GPIO_VALUE1) && (flag == 0)){
             start_time = hi_get_us();
             flag = 1;
-            printf("Get Start Time \n");
+            // printf("Get Start Time \n");
         }
         //echo低电平时结束计时
         if((val == HI_GPIO_VALUE0) && (flag == 1)){
             end_time = hi_get_us() - start_time;
             start_time = 0;
-            printf("Get Over Time \n");
+            // printf("Get Over Time \n");
             break;
         }
     }
@@ -51,3 +55,4 @@ float getDistance(void)
     printf("distance is %f\r\n",distance);
     return distance;
 }
+#endif
