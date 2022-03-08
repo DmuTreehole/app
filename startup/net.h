@@ -46,30 +46,7 @@ void ChangeSpeed(bool as){
         break;
     }
 }
-static void UltraSonicDetector(void *arg){
-    printf("[demo]创建超声波进程成功");
-    float distance = 1000000;
-    while(1){
-        while((distance=getDistance())<10){
-
-            direct = 1;
-            go_turnleft(2000);
-            printf("避障\n");
-            isTouched=true;
-        }
-    }
-}
-
-void autogo() {
-	while(1) {
-		if (getDistance() < 10 ) {
-			go_turnleft(2000);
-		} else {
-		   go_forward(400);
-		}
-	}
-} 
-
+ 
 void UdpServer(unsigned short port)
 {
 
@@ -156,10 +133,25 @@ void UdpServer(unsigned short port)
                 ChangeSpeed(false);
                 printf("减速\n");
 	    } else if (!strcmp("auto\n", buf)) {
-                autogo();
-		printf("自动巡航");
+		printf("自动巡航");	
+		while(1) {
+		if (getDistance() < 10 ) {
+			go_turnleft(2000);
+		} else {
+		   go_forward(400);
+		}
+		// 接受指令
+	        bzero(buf, SIZE1);
+                retval = recvfrom(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, &clientAddrLen);
+                if (retval < 0)
+                {
+                    printf("recvfrom failed, %ld!\r\n", retval);
+	        } else {
+	            stop();
+	            break;
+	        }
+	      }
 	    }
-
         }
     }
 
