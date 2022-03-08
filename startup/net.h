@@ -15,7 +15,7 @@
 #define SIZE1 128
 
 int speed = 800;
-
+int isauto = 0;
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 bool isTouched=false;
 void ChangeSpeed(bool as){
@@ -48,10 +48,10 @@ void ChangeSpeed(bool as){
 }
 static void UltraSonicDetector(void *arg){
     printf("[demo]创建超声波进程成功");
-    (void)arg;
-    float distance;
+    float distance = 1000000;
     while(1){
         while((distance=getDistance())<10){
+
             direct = 1;
             go_turnleft(2000);
             printf("避障\n");
@@ -59,18 +59,19 @@ static void UltraSonicDetector(void *arg){
         }
     }
 }
+
+void autogo() {
+	while(1) {
+		if (getDistance() < 10 ) {
+			go_turnleft(2000);
+		} else {
+		   go_forward(400);
+		}
+	}
+} 
+
 void UdpServer(unsigned short port)
 {
-
-    //创建线程来监听超声波
-    osThreadAttr_t attr;
-    attr.name = "UltraSonic";
-    attr.attr_bits = 0U;
-    attr.cb_mem = NULL;
-    attr.cb_size = 0U;
-    attr.stack_mem = NULL;
-    attr.stack_size = 10240;
-    attr.priority = osPriorityNormal;
 
     int send_length=0;
     ssize_t retval = 0;
@@ -96,10 +97,6 @@ void UdpServer(unsigned short port)
 
     // 接受信息
     char buf[SIZE1];
-    if (osThreadNew(UltraSonicDetector, NULL, &attr) == NULL) {
-        printf("Falied to create ultrasound\n");
-    }
-    printf("初始化完成");
     while (1)
     {
         // 每次清空BUF
@@ -158,7 +155,11 @@ void UdpServer(unsigned short port)
             {
                 ChangeSpeed(false);
                 printf("减速\n");
-            }
+	    } else if (!strcmp("auto\n", buf)) {
+                autogo();
+		printf("自动巡航");
+	    }
+
         }
     }
 
