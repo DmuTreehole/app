@@ -15,9 +15,7 @@
 #define SIZE1 128
 
 int speed = 800;
-int isauto = 0;
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
-bool isTouched=false;
 void ChangeSpeed(bool as){
     if (!as) {
         speed += 100;
@@ -86,16 +84,6 @@ void UdpServer(unsigned short port)
         else
         { // 成功就打印出信息
             printf("%s", buf);
-            //如果有避障，发一个包给前端
-            if(isTouched==true){
-                strcpy(buf,"touched\n");
-                send_length=sendto(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, clientAddrLen);
-                if(send_length<0){
-                    printf("发送数据包失败\n");
-                }
-                printf("已发送数据包\n");
-            }
-            isTouched=false;//初始化为没有避障的状态
             if (!strcmp("up\n", buf)) // 结束符也要比较
             {
                 direct = 0;
@@ -133,11 +121,13 @@ void UdpServer(unsigned short port)
                 ChangeSpeed(false);
                 printf("减速\n");
 	    } else if (!strcmp("auto\n", buf)) {
-		printf("自动巡航");	
+		printf("自动巡航\n");	
 		while(1) {
 		if (getDistance() < 10 ) {
+			printf("避障启动\n");
 			go_turnleft(2000);
 		} else {
+			printf("继续前进\n");
 		   go_forward(400);
 		}
 		// 接受指令
