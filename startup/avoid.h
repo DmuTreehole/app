@@ -13,15 +13,15 @@ void avoid(){
     rightdistance=getDistance();
     if(leftdistance<=rightdistance){
         //右转
-        go_back(200);
-        go_turnright(200);
+        go_back(100);
+        go_turnright(300);
     }else{
         //左转
-        go_back(200);
-        go_turnright(200);
+        go_back(100);
+        go_turnright(300);
     }
     set_angle(0);
-    go_forward(900);
+    go_forward(400);
 }
 #endif 
 
