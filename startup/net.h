@@ -12,6 +12,7 @@
 #include"supersound.h"
 #include "motor.h"
 #include"steering.h"
+#include"avoid.h"
 #define SIZE1 128
 
 int speed = 800;
@@ -123,14 +124,11 @@ void UdpServer(unsigned short port)
 		printf("自动巡航\n");	
 		while(1) {
 		if (getDistance() < 10 ) {
-			printf("避障启动\n");
-            stop()
-			go_turnleft(100);
+            avoid();
 		} else {
 			printf("继续前进\n");
 		   go_forward(900);
 		}
-
 	    }
 	    }
         }
