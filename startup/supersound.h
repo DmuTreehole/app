@@ -2,6 +2,7 @@
 #define SUPERSOUND
 #include <stdio.h>
 #include <unistd.h>
+#include "motor.h"
 #include "ohos_init.h"
 #include "ohos_types.h"
 #include "hi_types_base.h"
@@ -54,5 +55,16 @@ float getDistance(void)
     distance = end_time * 0.034 / 2;
     printf("distance is %f\r\n",distance);
     return distance;
+}
+
+void forauto(float dis) {
+     while(1) {
+	     if (getDistance() < dis) {
+		     printf("避障启动,dis: %f\n",getdgetDistance());
+		     go_turnleft(400);
+	     } else {
+		     go_forward(0);
+	     }
+   }
 }
 #endif

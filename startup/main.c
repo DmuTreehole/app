@@ -27,7 +27,9 @@ hi_void init(hi_void)
 
 void Move(void) {
 	RunHotspot();
-  	UdpServer(7895);    
+  	Openport();
+	UdpServer();    
+
  }
 
 SYS_RUN(Move); // BUG不用管 入口程序
