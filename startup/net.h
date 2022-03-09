@@ -48,7 +48,6 @@ void ChangeSpeed(bool as){
 void UdpServer(unsigned short port)
 {
 
-    int send_length=0;
     ssize_t retval = 0;
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // UDP socket
     struct sockaddr_in clientAddr = {0};          //客户端信息
