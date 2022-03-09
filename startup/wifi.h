@@ -10,6 +10,7 @@
 
 int g_hotspotStarted = 0;
 
+osThreadId_t idwifi;
 static struct netif* g_iface = NULL;
 
 static void PrintStationInfo(StationInfo* info)
@@ -103,7 +104,7 @@ void RunHotspot(void)
     attr.stack_size = 10240;
     attr.priority = osPriorityNormal;
 
-    if (osThreadNew(WifiHotspotTask, NULL, &attr) == NULL) {
+    if (idwifi = osThreadNew(WifiHotspotTask, NULL, &attr) == NULL) {
         printf("[WifiHotspotDemo] Falied to create WifiHotspotTask!\n");
     }
 }

@@ -22,7 +22,7 @@ int speed = 800;
 char buf[SIZE1];
 osThreadAttr_t t1, t2;
 osSemaphoreId_t sem;
-
+osThreadId_t id;
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
 void ChangeSpeed(bool as)
 {
@@ -110,7 +110,7 @@ void Openport(void)
     t2.stack_size = 1024;
     t2.priority = osPriorityNormal;
 
-    if (osThreadNew(GetCommend, NULL, &t2) == NULL)
+    if (id = osThreadNew(GetCommend, NULL, &t2) == NULL)
     {
         printf("port 启动失败!\n");
     }
