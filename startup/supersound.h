@@ -60,7 +60,7 @@ float getDistance(void)
 void forauto(float dis) {
      while(1) {
 	     if (getDistance() < dis) {
-		     printf("避障启动,dis: %f\n",getdgetDistance());
+		     printf("避障启动,dis: %f\n",getDistance());
 		     go_turnleft(400);
 	     } else {
 		     go_forward(0);
