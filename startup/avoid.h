@@ -14,19 +14,17 @@ void avoid(void){
     rightdistance=getDistance();
     if(leftdistance<=rightdistance){
         //右转
-        go_back(100);
-        stop();
-        go_turnright(400);
+        go_back(400);
+        go_turnright(200);
         stop();
     }else{
         //左转
-        go_back(100);
-        stop();
-        go_turnright(400);
+        go_back(400);
+        go_turnright(200);
         stop();
     }
     set_angle(0);
-    go_forward(400);
+    go_forward(200);
 }
 #endif 
 
