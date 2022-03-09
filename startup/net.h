@@ -11,7 +11,7 @@
 #include <netinet/in.h>
 #include"supersound.h"
 #include "motor.h"
-
+#include"steering.h"
 #define SIZE1 128
 
 int speed = 800;
@@ -124,23 +124,14 @@ void UdpServer(unsigned short port)
 		while(1) {
 		if (getDistance() < 10 ) {
 			printf("避障启动\n");
-			printf("距离:%f\n",getDistance());
-			go_turnleft(2000);
+            stop()
+			go_turnleft(100);
 		} else {
 			printf("继续前进\n");
-		   go_forward(400);
+		   go_forward(900);
 		}
-		// 接受指令
-	        bzero(buf, SIZE1);
-                retval = recvfrom(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, &clientAddrLen);
-                if (retval < 0)
-                {
-                    printf("recvfrom failed, %ld!\r\n", retval);
-	        } else {
-	            stop();
-	            break;
-	        }
-	      }
+
+	    }
 	    }
         }
     }
