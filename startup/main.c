@@ -27,18 +27,16 @@ hi_void init(hi_void)
 void Move(void)
 {
 
-	int ret = sem_init(&sem, 0, 0); //初始化信号量 1 并且赋予其资源
-	if (ret < 0)
+	sem= osSemaphoreNew(1U, 0U, NULL); //初始化信号量 1 并且赋予其资源
+	if (sem == NULL)
 	{
 		perror("sem_init");
-		return -1;
+		return;
 	}
 
 	RunHotspot();
 	Openport();
-	Server();
-	pthread_join(t1, NULL);
-	pthread_join(t2, NULL);
+	UdpServer();
 
 }
 

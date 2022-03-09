@@ -20,9 +20,7 @@
 
 int speed = 800;
 char buf[SIZE1];
-// pthread_t t1, t2;
 osThreadAttr_t t1, t2;
-// sem_t sem;
 osSemaphoreId_t sem;
 
 int direct = 0; // 0 直行 -1 后退 1 左转 2右转
@@ -96,7 +94,6 @@ static void GetCommend(void *arg)
         {
             printf("recvfrom failed, %ld!\r\n", retval);
         }
-        // sem_post(&sem);
         osSemaphoreRelease(sem);
         if (!strcmp("close\n", buf))
             break;
@@ -105,14 +102,15 @@ static void GetCommend(void *arg)
 
 void Openport(void)
 {
-    /*
-    if (pthread_create(&t1, NULL, (void *)GetCommend, NULL) != 0)
-    {
-        printf("创建信息接受进程失败\n");
-    }
-    */
+    t2.name = "port";
+    t2.attr_bits = 0U;
+    t2.cb_mem = NULL;
+    t2.cb_size = 0U;
+    t2.stack_mem = NULL;
+    t2.stack_size = 1024;
+    t2.priority = osPriorityNormal;
 
-    if (osThreadNew(UdpServer, NULL, &t2) == NULL)
+    if (osThreadNew(GetCommend, NULL, &t2) == NULL)
     {
         printf("port 启动失败!\n");
     }
@@ -123,7 +121,8 @@ static void UdpServer(void *arg)
     (void)arg;
     while (1)
     {
-        val = osSemaphoreAcquire(sid_Semaphore, 0);
+
+        osSemaphoreAcquire(sem, 0);
         // sem_wait(&sem);
         if (!strcmp("up\n", buf)) // 结束符也要比较
         {
@@ -175,12 +174,7 @@ static void UdpServer(void *arg)
 void Server(void)
 {
     printf("server 启动\n");
-    /*
-    if (pthread_create(&t2, NULL, (void *)UdpServer, NULL) != 0)
-    {
-        printf("创建信息接受进程失败\n");
-    }
-    */
+
     if (osThreadNew(UdpServer, NULL, &t1) == NULL)
     {
         printf("Server 启动失败!\n");
