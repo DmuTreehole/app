@@ -3,14 +3,14 @@
 #include"steering.h"
 #include"motor.h"
 #include"supersound.h"
-void avoid(){
+void avoid(void){
     //先停下来
     float leftdistance,rightdistance=0;
     stop();
     set_angle(-60);
     leftdistance=getDistance();
     set_angle(60);
-    set_angle(60)
+    set_angle(60);
     rightdistance=getDistance();
     if(leftdistance<=rightdistance){
         //右转
