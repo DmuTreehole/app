@@ -7,6 +7,7 @@
 #include "net.h"
 #include "steering.h"
 #include "hi_task.h"
+#include <pthread.h>
 
 // init PWM初始化
 hi_void init(hi_void)
@@ -29,7 +30,7 @@ void Move(void) {
 	RunHotspot();
   	Openport();
 	UdpServer();    
-
+  pthread_exit(NULL);
  }
 
 SYS_RUN(Move); // BUG不用管 入口程序
