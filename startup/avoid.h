@@ -17,7 +17,7 @@ void avoid(void){
         go_back(100);
         stop();
         go_turnright(400);
-        stop(;
+        stop();
     }else{
         //左转
         go_back(100);
