@@ -1,4 +1,4 @@
-#ifdef AVOID
+#ifndef AVOID
 #define AVOID
 #include"steering.h"
 #include"motor.h"
