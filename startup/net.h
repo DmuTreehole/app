@@ -125,6 +125,7 @@ void UdpServer(unsigned short port)
 		while(1) {
 		if (getDistance() < 10 ) {
 			printf("避障启动\n");
+			printf("距离:%f\n",getDistance());
 			go_turnleft(2000);
 		} else {
 			printf("继续前进\n");
