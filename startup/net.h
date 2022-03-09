@@ -86,7 +86,7 @@ static void GetCommend(void *arg) {
 
 void Openport(void) {
      //创建线程来监听端口
-    /*
+    
     osThreadAttr_t attr;
     attr.name = "getcommend";
     attr.attr_bits = 0U;
@@ -94,18 +94,18 @@ void Openport(void) {
     attr.cb_size = 0U;
     attr.stack_mem = NULL;
     attr.stack_size = 10240;
-    attr.priority = osPriorityNormal;
+    attr.priority = osPriorityNormal1;
     
     if (osThreadNew(GetCommend, NULL, &attr) == NULL) {
         printf("创建信息接受进程失败\n");
     }
-    *
-    */
+    
+   /*
     pthread_t t;
     if ( pthread_create(&t,NULL,(void*)GetCommend,NULL) != 0 ) {
         printf("创建信息接受进程失败\n");
     }
-
+*/
 }  
 
 
