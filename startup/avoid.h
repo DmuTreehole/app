@@ -16,12 +16,10 @@ void avoid(void){
         //右转
         go_turnright(200);
         printf("右转\n");
-        stop();
     }else{
         //左转
         go_turnleft(200);
         printf("左转\n");
-        stop();
     }
     //转向正向前进
     set_angle(0);
