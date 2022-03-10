@@ -68,7 +68,7 @@ void UdpServer(unsigned short port)
     memset(&receverAddr, 0, sizeof(receiverAddr));
     receverAddr.sin_family=AF_INET;
     receverAddr.sin_port = hton(7856);
-    receverAddr.sin_addr.s_addr=inet_addr("255.255.255.255");//设置广播地址
+    receverAddr.sin_addr.s_addr=inet_addr("192.168.1.255");//设置广播地址
 
     // 配置服务端信息
     bzero(&clientAddr, clientAddrLen); // 归零
