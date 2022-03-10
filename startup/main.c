@@ -37,8 +37,8 @@ void Move(void)
 	RunHotspot();
 	Openport();
 	UdpServer();
-  osThreadJion(id);
-  osThreadJion(idwifi);
+  osThreadJoin(id);
+  osThreadJoin(idwifi);
 }
 
 SYS_RUN(Move); // BUG不用管 入口程序

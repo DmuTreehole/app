@@ -107,8 +107,8 @@ void Openport(void)
     t2.cb_mem = NULL;
     t2.cb_size = 0U;
     t2.stack_mem = NULL;
-    t2.stack_size = 1024;
-    t2.priority = osPriorityNormal;
+    t2.stack_size = 10240;
+    t2.priority = osPriorityNormal1;
 
     if (id = osThreadNew(GetCommend, NULL, &t2) == NULL)
     {
