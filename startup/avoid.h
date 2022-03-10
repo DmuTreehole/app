@@ -12,6 +12,7 @@ void avoid(void){
     set_angle(60);
     set_angle(60);
     rightdistance=getDistance();
+    go_back(400);
     if(leftdistance<=rightdistance){
         //右转
         go_turnright(200);
