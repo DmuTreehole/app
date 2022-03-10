@@ -59,16 +59,16 @@ void UdpServer(unsigned short port)
 
     //开启广播
     int on =1;
-    int ret=setsockopt(sendfd,SQL_SOCKET,SO_BAOADCAST,&on,sizeof(on));
+    int ret=setsockopt(sendfd,SOL_SOCKET,SO_BROADCAST,&on,sizeof(on));
     if(ret<0){
         printf("广播打开失败\n");
     }
     //配置广播信息
-    struct sockaddr_in receverAddr={0};
-    memset(&receverAddr, 0, sizeof(receiverAddr));
-    receverAddr.sin_family=AF_INET;
-    receverAddr.sin_port = hton(7856);
-    receverAddr.sin_addr.s_addr=inet_addr("192.168.1.255");//设置广播地址
+    struct sockaddr_in receiverAddr={0};
+    memset(&receiverAddr, 0, sizeof(receiverAddr));
+    receiverAddr.sin_family=AF_INET;
+    receiverAddr.sin_port = htons(7856);
+    receiverAddr.sin_addr.s_addr=inet_addr("192.168.1.255");//设置广播地址
 
     // 配置服务端信息
     bzero(&clientAddr, clientAddrLen); // 归零
@@ -144,7 +144,7 @@ void UdpServer(unsigned short port)
                 bzero(buf, SIZE1);
                 //向前端发送数据包，代表避障一次
                 strcpy(buf,"complete\n");
-                send_length=sendto(sendfd, buf, SIZE1, 0, (struct sockaddr *)&receverAddr, sizeof(receverAddr));
+                send_length=sendto(sendfd, buf, SIZE1, 0, (struct sockaddr *)&receiverAddr, sizeof(receiverAddr));
                 if (send_length < 0)
                 {
                 printf("send packet failed, %ld!\r\n", send_length);
