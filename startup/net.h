@@ -127,7 +127,7 @@ void UdpServer(unsigned short port)
             avoid();
 		} else {
 			printf("继续前进\n");
-		    go_forward(800);
+		    go_forward(400);
 		}
 	    }
 	    }
