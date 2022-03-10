@@ -22,7 +22,6 @@ void avoid(void){
         go_turnleft(100);
         printf("左转\n");
     }
-    go_back(100);
     set_angle(0);
 }
 #endif 
