@@ -36,7 +36,7 @@ void Move(void)
 
 	RunHotspot();
 	Openport();
-	UdpServer();
+	UdpServer(void);
   osThreadJoin(id);
   osThreadJoin(idwifi);
 }
