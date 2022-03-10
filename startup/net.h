@@ -64,11 +64,11 @@ void UdpServer(unsigned short port)
         printf("广播打开失败\n");
     }
     //配置广播信息
-    struct sockaddr_in receiverAddr={0};
+    struct sockaddr_in receiverAddr;
     memset(&receiverAddr, 0, sizeof(receiverAddr));
     receiverAddr.sin_family=AF_INET;
     receiverAddr.sin_port = htons(7856);
-    receiverAddr.sin_addr.s_addr=inet_addr("192.168.1.255");//设置广播地址
+    receiverAddr.sin_addr.s_addr=inet_addr("255.255.255.255");//设置广播地址
 
     // 配置服务端信息
     bzero(&clientAddr, clientAddrLen); // 归零
@@ -151,12 +151,14 @@ void UdpServer(unsigned short port)
                 }
                 else
                 {
-                    printf("避障一次\n");
+                    close(sendkd);
+                    //printf("避障一次\n");
+                    printf("传送的数据长度为%d\n",send_length);
                 }
             } 
             else 
             {
-                printf("继续前进\n");
+                //printf("继续前进\n");
                 go_forward(800);
             }
             }

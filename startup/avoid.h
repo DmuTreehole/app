@@ -16,11 +16,11 @@ void avoid(void){
     if(leftdistance<=rightdistance){
         //右转
         go_turnright(100);
-        printf("右转\n");
+        //printf("右转\n");
     }else{
         //左转
         go_turnleft(100);
-        printf("左转\n");
+        //printf("左转\n");
     }
     set_angle(0);
 }

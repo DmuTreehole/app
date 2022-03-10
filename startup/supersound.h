@@ -52,7 +52,7 @@ float getDistance(void)
         }
     }
     distance = end_time * 0.034 / 2;
-    printf("distance is %f\r\n",distance);
+    //printf("distance is %f\r\n",distance);
     return distance;
 }
 #endif
