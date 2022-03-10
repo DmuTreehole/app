@@ -57,18 +57,17 @@ void UdpServer(unsigned short port)
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
     struct sockaddr_in serverAddr = {0};          // 服务端信息
 
-    //开启广播
-    int on =1;
-    int ret=setsockopt(sendfd,SOL_SOCKET,SO_BROADCAST,&on,sizeof(on));
-    if(ret<0){
-        printf("广播打开失败\n");
-    }
-    //配置广播信息
-    struct sockaddr_in receiverAddr;
-    memset(&receiverAddr, 0, sizeof(receiverAddr));
+    // //开启广播
+    // int on =1;
+    // int ret=setsockopt(sendfd,SOL_SOCKET,SO_BROADCAST,&on,sizeof(on));
+    // if(ret<0){
+    //     printf("广播打开失败\n");
+    // }
+    //配置发送信息
+    struct sockaddr_in receiverAddr={0};
     receiverAddr.sin_family=AF_INET;
     receiverAddr.sin_port = htons(7856);
-    receiverAddr.sin_addr.s_addr=inet_addr("255.255.255.255");//设置广播地址
+    receiverAddr.sin_addr.s_addr=inet_addr("192.168.1.2");//设置IP地址
 
     // 配置服务端信息
     bzero(&clientAddr, clientAddrLen); // 归零
