@@ -12,19 +12,18 @@ void avoid(void){
     set_angle(60);
     set_angle(60);
     rightdistance=getDistance();
-    go_back(400);
     if(leftdistance<=rightdistance){
         //右转
-        go_turnright(200);
+        go_turnright(400);
         printf("右转\n");
     }else{
         //左转
-        go_turnleft(200);
+        go_turnleft(400);
         printf("左转\n");
     }
     //转向正向前进
     set_angle(0);
-    go_forward(200);
+    go_forward(400);
 }
 #endif 
 
