@@ -151,7 +151,7 @@ void UdpServer(unsigned short port)
                 }
                 else
                 {
-                    close(sendkd);
+                    close(sendfd);
                     //printf("避障一次\n");
                     printf("传送的数据长度为%d\n",send_length);
                 }
