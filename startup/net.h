@@ -120,18 +120,19 @@ void UdpServer(unsigned short port)
             {
                 ChangeSpeed(false);
                 printf("减速\n");
-	    } else if (!strcmp("auto\n", buf)) {
-		printf("自动巡航\n");	
-		while(1) {
-            sleep(1);
-		if (getDistance() < 30 ) {
-            avoid();
-		} else {
-			printf("继续前进\n");
-		    go_forward(400);
-		}
-	    }
-	    }
+            } else if (!strcmp("auto\n", buf)) 
+            {
+            printf("自动巡航\n");	
+            while(1) {
+                sleep(1);
+            if (getDistance() < 30 ) {
+                avoid();
+            } else {
+                printf("继续前进\n");
+                go_forward(800);
+            }
+            }
+            }
         }
     }
 

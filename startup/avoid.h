@@ -6,7 +6,7 @@
 void avoid(void){
     //先停下来
     float leftdistance=0,rightdistance=0;
-    stop();
+    // stop();
     set_angle(-60);
     leftdistance=getDistance();
     set_angle(60);
