@@ -14,14 +14,13 @@ void avoid(void){
     rightdistance=getDistance();
     if(leftdistance<=rightdistance){
         //右转
-        go_turnright(100);
+        go_turnright(800);
         printf("右转\n");
     }else{
         //左转
-        go_turnleft(100);
+        go_turnleft(800);
         printf("左转\n");
     }
-    stop();
     set_angle(0);
 }
 #endif 
