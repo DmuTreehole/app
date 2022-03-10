@@ -124,7 +124,6 @@ void UdpServer(unsigned short port)
             {
             printf("自动巡航\n");	
             while(1) {
-                sleep(1);
             if (getDistance() < 30 ) {
                 avoid();
             } else {
