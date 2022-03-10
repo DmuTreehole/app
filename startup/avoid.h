@@ -3,6 +3,7 @@
 #include"steering.h"
 #include"motor.h"
 #include"supersound.h"
+//避障
 void avoid(void){
     //先停下来
     float leftdistance=0,rightdistance=0;
@@ -21,6 +22,7 @@ void avoid(void){
         go_turnleft(100);
         printf("左转\n");
     }
+    go_back(100);
     set_angle(0);
 }
 #endif 

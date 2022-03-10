@@ -50,6 +50,7 @@ void UdpServer(unsigned short port)
 {
 
     ssize_t retval = 0;
+    int send_length=0;//发送包的长度
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // UDP socket
     struct sockaddr_in clientAddr = {0};          //客户端信息
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
@@ -126,6 +127,16 @@ void UdpServer(unsigned short port)
             while(1) {
             if (getDistance() < 30 ) {
                 avoid();
+                bzero(buf, SIZE1);
+                //向前端发送数据包，代表避障一次
+                strcpy(buf,"complete\n");
+                send_length=sendto(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, clientAddrLen);
+                if (send_length < 0){
+                printf("send packet failed, %ld!\r\n", send_length);
+                }
+                else{
+                    printf("避障一次\n");
+                }
             } else {
                 printf("继续前进\n");
                 go_forward(800);
