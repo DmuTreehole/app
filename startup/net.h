@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <strings.h>
+#include<time.h>
 #include <unistd.h>
 #include "lwip/sockets.h"
 #include <sys/socket.h>
@@ -123,6 +124,7 @@ void UdpServer(unsigned short port)
 	    } else if (!strcmp("auto\n", buf)) {
 		printf("自动巡航\n");	
 		while(1) {
+            sleep(1000);
 		if (getDistance() < 30 ) {
             avoid();
 		} else {
