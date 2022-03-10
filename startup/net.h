@@ -52,25 +52,38 @@ void UdpServer(unsigned short port)
     ssize_t retval = 0;
     int send_length=0;//发送包的长度
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // UDP socket
+    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
     struct sockaddr_in clientAddr = {0};          //客户端信息
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
     struct sockaddr_in serverAddr = {0};          // 服务端信息
 
-    bzero(&clientAddr, clientAddrLen); // 归零
+    //开启广播
+    int on =1;
+    int ret=setsockopt(sendfd,SQL_SOCKET,SO_BAOADCAST,&on,sizeof(on));
+    if(ret<0){
+        printf("广播打开失败\n");
+    }
+    //配置广播信息
+    struct sockaddr_in receverAddr={0};
+    memset(&receverAddr, 0, sizeof(receiverAddr));
+    receverAddr.sin_family=AF_INET;
+    receverAddr.sin_port = hton(7856);
+    receverAddr.sin_addr.s_addr=inet_addr("255.255.255.255");//设置广播地址
+
     // 配置服务端信息
+    bzero(&clientAddr, clientAddrLen); // 归零
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(port);
     serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-    // 端口绑定
+    // 接收端口绑定
     retval = bind(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
     if (retval < 0)
     {
         printf("bind failed, %ld!\r\n %s", retval, strerror(errno));
         goto do_cleanup;
     }
-    printf("bind to port %d success!\r\n", port);
-
+    printf("bind to receive port %d success!\r\n", port);
     // 接受信息
     char buf[SIZE1];
     while (1)
@@ -125,19 +138,24 @@ void UdpServer(unsigned short port)
             {
             printf("自动巡航\n");	
             while(1) {
-            if (getDistance() < 30 ) {
+            if (getDistance() < 30 ) 
+            {
                 avoid();
                 bzero(buf, SIZE1);
                 //向前端发送数据包，代表避障一次
                 strcpy(buf,"complete\n");
-                send_length=sendto(sockfd, buf, SIZE1, 0, (struct sockaddr *)&clientAddr, clientAddrLen);
-                if (send_length < 0){
+                send_length=sendto(sendfd, buf, SIZE1, 0, (struct sockaddr *)&receverAddr, sizeof(receverAddr));
+                if (send_length < 0)
+                {
                 printf("send packet failed, %ld!\r\n", send_length);
                 }
-                else{
+                else
+                {
                     printf("避障一次\n");
                 }
-            } else {
+            } 
+            else 
+            {
                 printf("继续前进\n");
                 go_forward(800);
             }
