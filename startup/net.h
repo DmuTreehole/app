@@ -71,9 +71,8 @@ void UdpClient(const char *host,unsigned short port)
     else
     {
         //printf("避障一次\n");
-        printf("传送的数据长度为%d,%s\n",send_length,request);
+        printf("send UDP message {%s} %ld done!\r\n", request, send_length);
     }
-    printf("send UDP message {%s} %ld done!\r\n", request, retval);
 do_cleanup:
     printf("do_cleanup...\r\n");
     close(sockfd);
