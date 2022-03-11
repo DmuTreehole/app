@@ -51,6 +51,9 @@ void UdpClient(const char *host,unsigned short port)
     ssize_t send_length=0;//发送包的长度
     char request[]="complete\n";
     int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
+    if(sendfd<0){
+        printf("创建发送套接字失败\n");
+    }
         //配置发送信息
     struct sockaddr_in receiverAddr={0};
     receiverAddr.sin_family=AF_INET;
@@ -83,9 +86,7 @@ void UdpServer(unsigned short port)
 
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // UDP socket
 
-    if(sendfd<0){
-        printf("创建发送套接字失败\n");
-    }
+
     struct sockaddr_in clientAddr = {0};          //客户端信息
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
     struct sockaddr_in serverAddr = {0};          // 服务端信息
