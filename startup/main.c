@@ -7,7 +7,7 @@
 #include "net.h"
 #include "steering.h"
 #include "hi_task.h"
-
+#include "connecter.h"
 // init PWM初始化
 hi_void init(hi_void)
 {
@@ -26,7 +26,8 @@ hi_void init(hi_void)
 }
 
 void Move(void) {
-	RunHotspot();
+	// RunHotspot();
+	WifiConnectDemo();	//STA模式
   	UdpServer(7895);    
  }
 

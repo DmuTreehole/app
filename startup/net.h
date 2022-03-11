@@ -9,7 +9,6 @@
 #include "lwip/sockets.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include"net_common.h"
 #include"supersound.h"
 #include "motor.h"
 #include"steering.h"
