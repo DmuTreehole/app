@@ -171,12 +171,12 @@ void UdpServer(unsigned short port)
                 avoid();
                 bzero(buf, SIZE1);
                 strcpy(buf,"complete\n");
-                retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr, &clientAddrLen);
+                retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr, clientAddrLen);
                 if (retval<=0){
-                    printf("send message {%s} %ld failed!\r\n",);
+                    printf("send message {%s} %ld failed!\r\n");
                     goto do_cleanup;
                 }
-                printf("send message{%s} %ld done!\r\n",);
+                printf("send message{%s} %ld done!\r\n");
                 bzero(buf, SIZE1);
                 // UdpClient("192.168.1.2",7856);
             } 
