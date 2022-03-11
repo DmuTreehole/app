@@ -75,7 +75,7 @@ void UdpClient(const char *host,unsigned short port)
     }
 do_cleanup:
     printf("do_cleanup...\r\n");
-    lwip_closec(sendfd);
+    lwip_close(sendfd);
 }
 //udp服务端
 void UdpServer(unsigned short port)
