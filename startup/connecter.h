@@ -46,4 +46,4 @@ static void WifiConnectDemo(void)
         printf("[WifiConnectDemo] Falied to create WifiConnectTask!\n");
     }
 }
-#endif CONNECTER
+#endif
