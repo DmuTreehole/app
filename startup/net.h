@@ -49,10 +49,13 @@ void ChangeSpeed(bool as){
 void UdpServer(unsigned short port)
 {
 
-    ssize_t retval = 0;
-    int send_length=0;//发送包的长度
+    ssize_t retval = 0;//接收包的长度
+    ssize_t send_length=0;//发送包的长度
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0); // UDP socket
-    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
+    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);//TCP socket
+    if(sendfd<0){
+        printf("创建发送套接字失败\n");
+    }
     struct sockaddr_in clientAddr = {0};          //客户端信息
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
     struct sockaddr_in serverAddr = {0};          // 服务端信息
@@ -151,7 +154,7 @@ void UdpServer(unsigned short port)
                 else
                 {
                     //printf("避障一次\n");
-                    printf("传送的数据长度为%d\n",send_length);
+                    printf("传送的数据长度为%d,%s\n",send_length,buf);
                 }
             } 
             else 
