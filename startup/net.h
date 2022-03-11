@@ -50,8 +50,8 @@ void UdpClient(const char *host,unsigned short port)
 {
     ssize_t send_length=0;//发送包的长度
     char request[]="complete\n";
-    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
-    if(sendfd<0){
+    int sockfd=socket(AF_INET, SOCK_DGRAM, 0);
+    if(sockfd<0){
         printf("创建发送套接字失败\n");
     }
         //配置发送信息
