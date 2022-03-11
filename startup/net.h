@@ -171,7 +171,7 @@ void UdpServer(unsigned short port)
             {
                 avoid();
                 bzero(buf, SIZE1);
-                UdpClient("192.168.1.2",7856)
+                UdpClient("192.168.1.2",7856);
             } 
             else 
             {
