@@ -26,6 +26,7 @@ hi_void init(hi_void)
 }
 
 void Move(void) {
+	//第一个为AP模式，第二个为STA模式
 	// RunHotspot();
 	WifiConnectDemo();	//STA模式
   	UdpServer(7895);    

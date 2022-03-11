@@ -2,7 +2,6 @@
 #define STA
 #include "wifi_device.h"
 #include "cmsis_os2.h"
-
 #include "lwip/netifapi.h"
 #include "lwip/api_shell.h"
 
@@ -39,19 +38,19 @@ static void OnWifiScanStateChanged(int state, int size)
     printf("%s %d, state = %X, size = %d\r\n", __FUNCTION__, __LINE__, state, size);
 }
 
-static WifiEvent g_defaultWifiEventListener = {
+static WifiEvent s_defaultWifiEventListener = {
     .OnWifiConnectionChanged = OnWifiConnectionChanged,
     .OnWifiScanStateChanged = OnWifiScanStateChanged
 };
 
-static struct netif* g_iface = NULL;
+static struct netif* s_iface = NULL;
 
 int ConnectToHotspot(WifiDeviceConfig* apConfig)
 {
     WifiErrorCode errCode;
     int netId = -1;
 
-    errCode = RegisterWifiEvent(&g_defaultWifiEventListener);
+    errCode = RegisterWifiEvent(&s_defaultWifiEventListener);
     printf("RegisterWifiEvent: %d\r\n", errCode);
 
     errCode = EnableWifi();
@@ -69,13 +68,13 @@ int ConnectToHotspot(WifiDeviceConfig* apConfig)
     }
     printf("g_connected: %d\r\n", g_connected);
 
-    g_iface = netifapi_netif_find("wlan0");
-    if (g_iface) {
-        err_t ret = netifapi_dhcp_start(g_iface);
+    s_iface = netifapi_netif_find("wlan0");
+    if (s_iface) {
+        err_t ret = netifapi_dhcp_start(s_iface);
         printf("netifapi_dhcp_start: %d\r\n", ret);
 
         osDelay(100); // wait DHCP server give me IP
-        ret = netifapi_netif_common(g_iface, dhcp_clients_info_show, NULL);
+        ret = netifapi_netif_common(s_iface, dhcp_clients_info_show, NULL);
         printf("netifapi_netif_common: %d\r\n", ret);
     }
     return netId;
@@ -83,15 +82,15 @@ int ConnectToHotspot(WifiDeviceConfig* apConfig)
 
 void DisconnectWithHotspot(int netId)
 {
-    if (g_iface) {
-        err_t ret = netifapi_dhcp_stop(g_iface);
+    if (s_iface) {
+        err_t ret = netifapi_dhcp_stop(s_iface);
         printf("netifapi_dhcp_stop: %d\r\n", ret);
     }
 
     WifiErrorCode errCode = Disconnect(); // disconnect with your AP
     printf("Disconnect: %d\r\n", errCode);
 
-    errCode = UnRegisterWifiEvent(&g_defaultWifiEventListener);
+    errCode = UnRegisterWifiEvent(&s_defaultWifiEventListener);
     printf("UnRegisterWifiEvent: %d\r\n", errCode);
 
     RemoveDevice(netId); // remove AP config
