@@ -45,38 +45,38 @@ void ChangeSpeed(bool as){
         break;
     }
 }
-//UDP客户端
-void UdpClient(const char *host,unsigned short port)
-{
-    ssize_t send_length=0;//发送包的长度
-    char request[]="complete\n";
-    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
-    if(sendfd<0){
-        printf("创建发送套接字失败\n");
-    }
-        //配置发送信息
-    struct sockaddr_in receiverAddr={0};
-    receiverAddr.sin_family=AF_INET;
-    receiverAddr.sin_port = htons(port);
-    if (inet_pton(AF_INET, host, &receiverAddr.sin_addr) <= 0) { // 将主机IP地址从“点分十进制”字符串 转化为 标准格式（32位整数）
-        printf("inet_pton failed!\r\n");
-        goto do_cleanup;
-    }
-    // UDP socket 是 “无连接的” ，因此每次发送都必须先指定目标主机和端口，主机可以是多播地址
-    send_length= sendto(sendfd, request, sizeof(request), 0, (struct sockaddr *)&receiverAddr, sizeof(receiverAddr));
-    if (send_length < 0) {
-        printf("sendto failed!\r\n");
-        goto do_cleanup;
-    }
-    else
-    {
-        //printf("避障一次\n");
-        printf("send UDP message {%s} %ld done!\r\n", request, send_length);
-    }
-do_cleanup:
-    printf("do_cleanup...\r\n");
-    lwip_close(sendfd);
-}
+// //UDP客户端
+// void UdpClient(const char *host,unsigned short port)
+// {
+//     ssize_t send_length=0;//发送包的长度
+//     char request[]="complete\n";
+//     int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
+//     if(sendfd<0){
+//         printf("创建发送套接字失败\n");
+//     }
+//         //配置发送信息
+//     struct sockaddr_in receiverAddr={0};
+//     receiverAddr.sin_family=AF_INET;
+//     receiverAddr.sin_port = htons(port);
+//     if (inet_pton(AF_INET, host, &receiverAddr.sin_addr) <= 0) { // 将主机IP地址从“点分十进制”字符串 转化为 标准格式（32位整数）
+//         printf("inet_pton failed!\r\n");
+//         goto do_cleanup;
+//     }
+//     // UDP socket 是 “无连接的” ，因此每次发送都必须先指定目标主机和端口，主机可以是多播地址
+//     send_length= sendto(sendfd, request, sizeof(request), 0, (struct sockaddr *)&receiverAddr, sizeof(receiverAddr));
+//     if (send_length < 0) {
+//         printf("sendto failed!\r\n");
+//         goto do_cleanup;
+//     }
+//     else
+//     {
+//         //printf("避障一次\n");
+//         printf("send UDP message {%s} %ld done!\r\n", request, send_length);
+//     }
+// do_cleanup:
+//     printf("do_cleanup...\r\n");
+//     lwip_close(sendfd);
+// }
 //udp服务端
 void UdpServer(unsigned short port)
 {
@@ -170,7 +170,15 @@ void UdpServer(unsigned short port)
             {
                 avoid();
                 bzero(buf, SIZE1);
-                UdpClient("192.168.1.2",7856);
+                strcpy(buf,"complete\n");
+                retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr, &clientAddrLen);
+                if (retval<=0){
+                    printf("send message {%s} %ld failed!\r\n",);
+                    goto do_cleanup;
+                }
+                printf("send message{%s} %ld done!\r\n",);
+                bzero(buf, SIZE1);
+                // UdpClient("192.168.1.2",7856);
             } 
             else 
             {
