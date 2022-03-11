@@ -50,8 +50,8 @@ void UdpClient(const char *host,unsigned short port)
 {
     ssize_t send_length=0;//发送包的长度
     char request[]="complete\n";
-    int sockfd=socket(AF_INET, SOCK_DGRAM, 0);
-    if(sockfd<0){
+    int sendfd=socket(AF_INET, SOCK_DGRAM, 0);
+    if(sendfd<0){
         printf("创建发送套接字失败\n");
     }
         //配置发送信息
@@ -63,7 +63,7 @@ void UdpClient(const char *host,unsigned short port)
         goto do_cleanup;
     }
     // UDP socket 是 “无连接的” ，因此每次发送都必须先指定目标主机和端口，主机可以是多播地址
-    send_length= sendto(sockfd, request, sizeof(request), 0, (struct sockaddr *)&receiverAddr, sizeof(receiverAddr));
+    send_length= sendto(sendfd, request, sizeof(request), 0, (struct sockaddr *)&receiverAddr, sizeof(receiverAddr));
     if (send_length < 0) {
         printf("sendto failed!\r\n");
         goto do_cleanup;
@@ -75,7 +75,7 @@ void UdpClient(const char *host,unsigned short port)
     }
 do_cleanup:
     printf("do_cleanup...\r\n");
-    close(sockfd);
+    lwip_closec(sendfd);
 }
 //udp服务端
 void UdpServer(unsigned short port)
