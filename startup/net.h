@@ -89,7 +89,7 @@ void UdpServer(unsigned short port)
     struct sockaddr_in clientAddr = {0};          //客户端信息
     socklen_t clientAddrLen = sizeof(clientAddr); // 客户端长度
     struct sockaddr_in serverAddr = {0};          // 服务端信息
-
+    // struct sockaddr_in SendAddr = {0};          // 服务端信息 
     // //开启广播
     // int on =1;
     // int ret=setsockopt(sendfd,SOL_SOCKET,SO_BROADCAST,&on,sizeof(on));
@@ -166,27 +166,33 @@ void UdpServer(unsigned short port)
             {
             printf("自动巡航\n");	
             while(1) {
-            if (getDistance() < 30 ) 
-            {
-                avoid();
-                bzero(buf, SIZE1);
-                strcpy(buf,"complete\n");
-                retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr, clientAddrLen);
-                // printf("%s",clientAddr.sin_addr.s_addr);
-                if (retval<=0){
-                    printf("send message {%s} %ld failed!\r\n",buf,retval);
-                    goto do_cleanup;
+                if (getDistance() < 30 ) 
+                {
+                    avoid();
+                    bzero(buf, SIZE1);
+                    strcpy(buf,"complete\n");
+                    // SendAddr = clientAddr;
+                    // SendAddr.sin_port = 7856;
+                    clientAddr.sin_port = ntohs(7856);
+                    printf("ClientAddr = %s port = %d \n",inet_ntoa(clientAddr.sin_addr),ntohs(clientAddr.sin_port));
+                    retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr,sizeof(clientAddr));
+                    // printf("%s",clientAddr.sin_addr.s_addr);
+                    if (retval<=0){
+                        printf("send message {%s} %ld failed!\r\n",buf,retval);
+                        goto do_cleanup;
+                    }
+                    printf("send message{%s} %ld done!\r\n",buf,retval);
+                    bzero(buf, SIZE1);
+                    // UdpClient("192.168.1.2",7856);
+                } 
+                else 
+                {
+                    //printf("继续前进\n");
+                    go_forward(800);
                 }
-                printf("send message{%s} %ld done!\r\n",buf,retval);
-                bzero(buf, SIZE1);
-                // UdpClient("192.168.1.2",7856);
-            } 
-            else 
-            {
-                //printf("继续前进\n");
-                go_forward(800);
+                osDelay(3000);
             }
-            }
+                
             }
         }
     }
