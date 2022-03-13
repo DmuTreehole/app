@@ -11,7 +11,6 @@ void avoid(void){
     set_angle(-60);
     leftdistance=getDistance();
     set_angle(60);
-    set_angle(60);
     rightdistance=getDistance();
     if(leftdistance<=rightdistance){
         //右转
@@ -23,6 +22,8 @@ void avoid(void){
         //printf("左转\n");
     }
     set_angle(0);
+    osDelay(50);
+    go_forward(100);
 }
 #endif 
 

@@ -166,14 +166,14 @@ void UdpServer(unsigned short port)
             {
             printf("自动巡航\n");	
             while(1) {
-                if (getDistance() < 30 ) 
+                if (getDistance() < 50 ) 
                 {
                     avoid();
                     bzero(buf, SIZE1);
                     strcpy(buf,"complete\n");
                     // SendAddr = clientAddr;
                     // SendAddr.sin_port = 7856;
-                    clientAddr.sin_port = ntohs(7856);
+                    clientAddr.sin_port = ntohs(7895);
                     printf("ClientAddr = %s port = %d \n",inet_ntoa(clientAddr.sin_addr),ntohs(clientAddr.sin_port));
                     retval=sendto(sockfd,buf,strlen(buf),0,(struct sockaddr *)&clientAddr,sizeof(clientAddr));
                     // printf("%s",clientAddr.sin_addr.s_addr);
@@ -189,10 +189,9 @@ void UdpServer(unsigned short port)
                 {
                     //printf("继续前进\n");
                     go_forward(800);
+                    osDelay(30);
                 }
-                osDelay(3000);
             }
-                
             }
         }
     }
